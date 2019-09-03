@@ -5,6 +5,7 @@ A reddit bot for leaving removal reasons on removed submissions that have been g
 1. Install Python 3
 2. Install PIP (https://pip.pypa.io/en/stable/installing/)
 3. pip install praw
+4. pip install pyyaml
 
 # Configurations
 1. Set up a reddit wikipage with YAML formatted reasons you want to have for each rule. This page must include a header, footer, and rules section. See example rule page example.yaml
