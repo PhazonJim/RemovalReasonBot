@@ -1,20 +1,20 @@
 #Rename to config.yaml
 client:
-  client_id: '<client id>'
-  user_agent: '<user agent>'
-  client_secret: '<client secret>'
-  username: '<reddit username>'
-  password: '<reddit password>'
+  client_id: "<client id>"
+  user_agent: "<user agent>"
+  client_secret: "<client secret>"
+  username: "<reddit username>"
+  password: "<reddit password>"
 mod_log_depth: 25
-subreddit: '<subreddit name>'
-wiki_subreddit: '<subreddit that wiki is under>'
-removal_reasons_wiki: '<wiki page name>'
+subreddit: "<subreddit name>"
+wiki_subreddit: "<subreddit that wiki is under>"
+removal_reasons_wiki: "<wiki page name>"
 ignore_mods:
   - AutoModerator
 #<rule number> : <rule regex pattern - whitespace is removed automatically to simplify things>
 regexes:
-  '1' : '(rule1)|(r1)'
-  '2' : '(rule2)|(r2)'
-  '3' : '(rule3)|(r3)'
-  '4' : '(rule4)|(r4)'
-  '5' : '(rule5)|(r5)'
+  "1" : "(rule1)|(r1)"
+  "2" : "(rule2)|(r2)"
+  "3" : "(rule3)|(r3)"
+  "4" : "(rule4)|(r4)"
+  "5" : "(rule5)|(r5)"
