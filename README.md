@@ -1,7 +1,7 @@
 # RemovalReasonBot
 A reddit bot for leaving removal reasons on removed submissions that have been given a flair containing a rule number
 
-# environment setup instructions
+# Environment setup instructions
 1. Install Python 3
 2. Install PIP (https://pip.pypa.io/en/stable/installing/)
 3. pip install -r requirements.txt
