@@ -60,7 +60,7 @@ def checkForDuplicateComments(submissionObj):
         if isinstance(top_level_comment, MoreComments):
             continue
         #If there is a top level comment from the bot username, return true
-        if top_level_comment.author == 'PhazonJim':
+        if top_level_comment.distinguished:
             return True
     return False
 
@@ -73,12 +73,11 @@ def postComment(submissionObject, submissionRule, removalReasons):
     try:
         #Leave a comment
         comment = submissionObject.reply(commentBody)
-        #Lock it
+        comment.mod.distinguish(how="yes",sticky=True)
         comment.mod.lock()
-        #Distinguish and Sticky 
-        comment.mod.distinguish(how='yes', sticky=True)
         return comment
-    except:
+    except Exception as e:
+        print (e)
         #If anything bad happens, return back false
         return False
 
@@ -108,6 +107,7 @@ if __name__ == '__main__':
             submissionId = log.target_fullname.split('_')[1]
             if submissionId not in postCache:
                 submissionObject = reddit.submission(id=submissionId)
+                #Only comment on removed submmissions
                 if submissionObject.removed:
                     submissionFlair = submissionObject.link_flair_text
                     rule = getRuleFromRegexMatch(submissionFlair)
