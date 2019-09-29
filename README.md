@@ -16,9 +16,10 @@ A reddit bot for leaving removal reasons on removed submissions that have been g
 
 # Features
 1. Will only leave comments on posts that have been removed and have a rule in the flair that matches your configurations
-2. Checks to ensure double comments aren't left
+2. Checks to ensure there isn't already a distinguished comment in the comment section
 3. Keeps track of posts that have been commented on to save time/resources
+4. Allows a list of moderators to ignore from the log - For example if you have Automoderator in this list, all posts removed by Automod will get ignored
 
-#TODO
+# TODO
 1. More error handling
 2. Additional customizations

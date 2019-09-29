@@ -9,7 +9,7 @@ subreddit: '<subreddit name>'
 wiki_subreddit: '<subreddit that wiki is under>'
 removal_reasons_wiki: '<wiki page name>'
 ignore_mods:
-  AutoModerator
+  - AutoModerator
 #<rule number> : <rule regex pattern - whitespace is removed automatically to simplify things>
 regexes:
   '1' : '(rule1)|(r1)'
