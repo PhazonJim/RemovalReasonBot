@@ -1,3 +1,4 @@
+#Rename to config.yaml
 client:
   client_id: '<client id>'
   user_agent: '<user agent>'
