@@ -4,7 +4,6 @@ import json
 import os
 import re
 import yaml
-from pprint import pprint
 from praw.models import MoreComments
 
 #===Constants===#
