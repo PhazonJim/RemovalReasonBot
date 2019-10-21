@@ -14,6 +14,9 @@ CACHE_FILE =  os.path.join(os.path.dirname(__file__), "cache.json")
 #Config file
 config = None
 
+def s_to_f(non_f_str: str):
+    return eval(f'f"""{non_f_str}"""')
+
 def loadConfig():
     global config
     #Load configs
@@ -62,7 +65,7 @@ def checkForDuplicateComments(submissionObj):
 def postComment(submissionObject, submissionRule, removalReasons):
     #Build up comment body from wiki
     commentBody = ""
-    commentBody += removalReasons["header"]
+    commentBody += s_to_f(removalReasons["header"])
     commentBody += removalReasons["rules"][submissionRule]
     commentBody += removalReasons["footer"]
     try:
