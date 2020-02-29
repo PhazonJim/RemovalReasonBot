@@ -3,6 +3,7 @@ import csv
 import json
 import os
 import re
+import sys
 import yaml
 from praw.models import MoreComments
 
@@ -14,8 +15,33 @@ CACHE_FILE =  os.path.join(os.path.dirname(__file__), "cache.json")
 #Config file
 config = None
 
-def s_to_f(non_f_str: str):
+def s_to_f(non_f_str: str, submissionObject):
+    # If you have the username being eval'd in this string and the user deleted their post, this will cause errors
+    # So this is handled with a try catch later 
     return eval(f'f"""{non_f_str}"""')
+
+def testTemplates():
+    #Intialize 
+    loadConfig()
+    reddit = initReddit()
+    removalReasons = getRemovalReasons(reddit)
+    #Local vars
+    submissions = []
+    submissionId = config['templateTestId']
+    mySubmission = reddit.submission(id=submissionId)
+
+    rules = config['regexes'].keys()
+    for rule in rules:
+        submissions.append({"rule": rule, "_self": mySubmission})
+
+
+    #Leave removal reason comments
+    for submission in submissions:
+        submissionObject = submission["_self"]
+        submissionRule = submission["rule"]
+        result = postComment(submissionObject, submissionRule, removalReasons)
+        if result:
+            print("Comment Submitted")
 
 def loadConfig():
     global config
@@ -63,12 +89,12 @@ def checkForDuplicateComments(submissionObj):
     return any(comment.distinguished for comment in submissionObj.comments)
 
 def postComment(submissionObject, submissionRule, removalReasons):
-    #Build up comment body from wiki
-    commentBody = ""
-    commentBody += s_to_f(removalReasons["header"])
-    commentBody += removalReasons["rules"][submissionRule]
-    commentBody += removalReasons["footer"]
     try:
+        #Build up comment body from wiki
+        commentBody = ""
+        commentBody += s_to_f(removalReasons["header"], submissionObject)
+        commentBody += removalReasons["rules"][submissionRule]
+        commentBody += removalReasons["footer"]
         #Leave a comment
         comment = submissionObject.reply(commentBody)
         comment.mod.distinguish(how="yes",sticky=True)
@@ -85,6 +111,13 @@ def saveCache(postCache):
             fout.write(chunk)
 
 if __name__ == "__main__":
+    #Run tests
+    if len(sys.argv) >= 1:
+        if sys.argv[1] == '--test':
+            print("Running Tests...")
+            testTemplates()
+            exit()
+
     #Intialize 
     loadConfig()
     postCache = loadCache()
