@@ -1,2 +1,2 @@
 praw==6.4.0
-PyYAML==5.1.2
+PyYAML==5.4
